@@ -1,0 +1,370 @@
+{
+  "groups": [
+    {
+      "name": "sidebar",
+      "display_name": "Sidebar Navigation",
+      "description": "Menu utama pada sidebar admin panel",
+      "items": [
+        {
+          "title": "Dashboard",
+          "url": "dashboard",
+          "is_route": true,
+          "icon": "LayoutDashboard",
+          "order": 1,
+          "roles": ["super-admin", "admin", "editor"]
+        },
+        {
+          "title": "Portofolio",
+          "icon": "Briefcase",
+          "order": 2,
+          "roles": ["super-admin", "admin", "editor"],
+          "children": [
+            {
+              "title": "Proyek",
+              "url": "portfolio.projects.index",
+              "is_route": true,
+              "icon": "FolderKanban",
+              "order": 1,
+              "roles": ["super-admin", "admin", "editor"],
+              "permissions": ["projects.viewAny"]
+            },
+            {
+              "title": "Kategori Proyek",
+              "url": "portfolio.categories.index",
+              "is_route": true,
+              "icon": "Tag",
+              "order": 2,
+              "roles": ["super-admin", "admin"],
+              "permissions": ["project-categories.viewAny"]
+            },
+            {
+              "title": "Teknologi / Stack",
+              "url": "portfolio.stacks.index",
+              "is_route": true,
+              "icon": "Layers",
+              "order": 3,
+              "roles": ["super-admin", "admin"],
+              "permissions": ["stacks.viewAny"]
+            },
+            {
+              "title": "Testimoni",
+              "url": "portfolio.testimonials.index",
+              "is_route": true,
+              "icon": "MessageSquareQuote",
+              "order": 4,
+              "roles": ["super-admin", "admin", "editor"],
+              "permissions": ["testimonials.viewAny"]
+            }
+          ]
+        },
+        {
+          "title": "Blog",
+          "icon": "NotebookPen",
+          "order": 3,
+          "roles": ["super-admin", "admin", "editor"],
+          "children": [
+            {
+              "title": "Artikel",
+              "url": "blog.posts.index",
+              "is_route": true,
+              "icon": "FileText",
+              "order": 1,
+              "roles": ["super-admin", "admin", "editor"],
+              "permissions": ["posts.viewAny"]
+            },
+            {
+              "title": "Kategori",
+              "url": "blog.categories.index",
+              "is_route": true,
+              "icon": "FolderOpen",
+              "order": 2,
+              "roles": ["super-admin", "admin"],
+              "permissions": ["blog-categories.viewAny"]
+            },
+            {
+              "title": "Tag",
+              "url": "blog.tags.index",
+              "is_route": true,
+              "icon": "Tags",
+              "order": 3,
+              "roles": ["super-admin", "admin"],
+              "permissions": ["tags.viewAny"]
+            },
+            {
+              "title": "Komentar",
+              "url": "blog.comments.index",
+              "is_route": true,
+              "icon": "MessageCircle",
+              "order": 4,
+              "roles": ["super-admin", "admin"],
+              "permissions": ["comments.viewAny"]
+            }
+          ]
+        },
+        {
+          "title": "Media",
+          "icon": "Image",
+          "order": 4,
+          "roles": ["super-admin", "admin", "editor"],
+          "children": [
+            {
+              "title": "Galeri",
+              "url": "media.gallery.index",
+              "is_route": true,
+              "icon": "GalleryHorizontalEnd",
+              "order": 1,
+              "roles": ["super-admin", "admin", "editor"],
+              "permissions": ["gallery.viewAny"]
+            },
+            {
+              "title": "File Manager",
+              "url": "media.files.index",
+              "is_route": true,
+              "icon": "HardDrive",
+              "order": 2,
+              "roles": ["super-admin", "admin"],
+              "permissions": ["files.viewAny"]
+            }
+          ]
+        },
+        {
+          "title": "Halaman",
+          "icon": "LayoutTemplate",
+          "order": 5,
+          "roles": ["super-admin", "admin"],
+          "children": [
+            {
+              "title": "Halaman Statis",
+              "url": "pages.index",
+              "is_route": true,
+              "icon": "FileStack",
+              "order": 1,
+              "roles": ["super-admin", "admin"],
+              "permissions": ["pages.viewAny"]
+            },
+            {
+              "title": "Hero / Banner",
+              "url": "pages.hero.index",
+              "is_route": true,
+              "icon": "PanelTop",
+              "order": 2,
+              "roles": ["super-admin", "admin"],
+              "permissions": ["heroes.viewAny"]
+            },
+            {
+              "title": "FAQ",
+              "url": "pages.faq.index",
+              "is_route": true,
+              "icon": "CircleHelp",
+              "order": 3,
+              "roles": ["super-admin", "admin"],
+              "permissions": ["faqs.viewAny"]
+            }
+          ]
+        },
+        {
+          "title": "Profil & CV",
+          "icon": "UserCircle",
+          "order": 6,
+          "roles": ["super-admin", "admin"],
+          "children": [
+            {
+              "title": "Profil Saya",
+              "url": "profile.index",
+              "is_route": true,
+              "icon": "Contact",
+              "order": 1,
+              "roles": ["super-admin", "admin"],
+              "permissions": ["profile.view"]
+            },
+            {
+              "title": "Pengalaman Kerja",
+              "url": "profile.experiences.index",
+              "is_route": true,
+              "icon": "History",
+              "order": 2,
+              "roles": ["super-admin", "admin"],
+              "permissions": ["experiences.viewAny"]
+            },
+            {
+              "title": "Pendidikan",
+              "url": "profile.educations.index",
+              "is_route": true,
+              "icon": "GraduationCap",
+              "order": 3,
+              "roles": ["super-admin", "admin"],
+              "permissions": ["educations.viewAny"]
+            },
+            {
+              "title": "Skill",
+              "url": "profile.skills.index",
+              "is_route": true,
+              "icon": "Sparkles",
+              "order": 4,
+              "roles": ["super-admin", "admin"],
+              "permissions": ["skills.viewAny"]
+            },
+            {
+              "title": "Sertifikat",
+              "url": "profile.certificates.index",
+              "is_route": true,
+              "icon": "BadgeCheck",
+              "order": 5,
+              "roles": ["super-admin", "admin"],
+              "permissions": ["certificates.viewAny"]
+            },
+            {
+              "title": "Layanan",
+              "url": "profile.services.index",
+              "is_route": true,
+              "icon": "HandCoins",
+              "order": 6,
+              "roles": ["super-admin", "admin"],
+              "permissions": ["services.viewAny"]
+            }
+          ]
+        },
+        {
+          "title": "Pesan & Kontak",
+          "icon": "Inbox",
+          "order": 7,
+          "roles": ["super-admin", "admin"],
+          "children": [
+            {
+              "title": "Pesan Masuk",
+              "url": "contact.messages.index",
+              "is_route": true,
+              "icon": "MailOpen",
+              "order": 1,
+              "roles": ["super-admin", "admin"],
+              "permissions": ["messages.viewAny"]
+            },
+            {
+              "title": "Newsletter",
+              "url": "contact.newsletter.index",
+              "is_route": true,
+              "icon": "Rss",
+              "order": 2,
+              "roles": ["super-admin", "admin"],
+              "permissions": ["newsletter.viewAny"]
+            }
+          ]
+        },
+        {
+          "title": "Manajemen Akses",
+          "icon": "ShieldCheck",
+          "order": 8,
+          "roles": ["super-admin", "admin"],
+          "children": [
+            {
+              "title": "Users",
+              "url": "auth.users.index",
+              "is_route": true,
+              "icon": "Users",
+              "order": 1,
+              "roles": ["super-admin", "admin"],
+              "permissions": ["users.viewAny"]
+            },
+            {
+              "title": "Roles",
+              "url": "auth.roles.index",
+              "is_route": true,
+              "icon": "Shield",
+              "order": 2,
+              "roles": ["super-admin", "admin"],
+              "permissions": ["roles.viewAny"]
+            },
+            {
+              "title": "Permissions",
+              "url": "auth.permissions.index",
+              "is_route": true,
+              "icon": "KeyRound",
+              "order": 3,
+              "roles": ["super-admin", "admin"],
+              "permissions": ["permissions.viewAny"]
+            }
+          ]
+        },
+        {
+          "title": "Manajemen Menu",
+          "icon": "PanelLeft",
+          "order": 9,
+          "roles": ["super-admin", "admin"],
+          "children": [
+            {
+              "title": "Group Menu",
+              "url": "menu.groups.index",
+              "is_route": true,
+              "icon": "Layers",
+              "order": 1,
+              "roles": ["super-admin", "admin"],
+              "permissions": ["menu-groups.viewAny"]
+            },
+            {
+              "title": "Item Menu",
+              "url": "menu.index",
+              "is_route": true,
+              "icon": "List",
+              "order": 2,
+              "roles": ["super-admin", "admin"],
+              "permissions": ["menus.viewAny"]
+            }
+          ]
+        },
+        {
+          "title": "Pengaturan",
+          "icon": "Settings",
+          "order": 10,
+          "roles": ["super-admin", "admin"],
+          "children": [
+            {
+              "title": "Pengaturan Umum",
+              "url": "settings.general",
+              "is_route": true,
+              "icon": "SlidersHorizontal",
+              "order": 1,
+              "roles": ["super-admin", "admin"],
+              "permissions": ["settings.view"]
+            },
+            {
+              "title": "SEO",
+              "url": "settings.seo",
+              "is_route": true,
+              "icon": "SearchCode",
+              "order": 2,
+              "roles": ["super-admin", "admin"],
+              "permissions": ["settings.seo"]
+            },
+            {
+              "title": "Social Media",
+              "url": "settings.social",
+              "is_route": true,
+              "icon": "Share2",
+              "order": 3,
+              "roles": ["super-admin", "admin"],
+              "permissions": ["settings.social"]
+            },
+            {
+              "title": "Integrasi",
+              "url": "settings.integrations",
+              "is_route": true,
+              "icon": "Plug",
+              "order": 4,
+              "roles": ["super-admin"],
+              "permissions": ["settings.integrations"]
+            },
+            {
+              "title": "Backup & Log",
+              "url": "settings.backup",
+              "is_route": true,
+              "icon": "DatabaseBackup",
+              "order": 5,
+              "roles": ["super-admin"],
+              "permissions": ["settings.backup"]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
