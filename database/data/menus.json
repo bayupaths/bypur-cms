@@ -3,7 +3,7 @@
     {
       "name": "sidebar",
       "display_name": "Sidebar Navigation",
-      "description": "Menu utama pada sidebar admin panel",
+      "description": "Main navigation menu for the admin panel",
       "items": [
         {
           "title": "Dashboard",
@@ -14,13 +14,13 @@
           "roles": ["super-admin", "admin", "editor"]
         },
         {
-          "title": "Portofolio",
+          "title": "Portfolio",
           "icon": "Briefcase",
           "order": 2,
           "roles": ["super-admin", "admin", "editor"],
           "children": [
             {
-              "title": "Proyek",
+              "title": "Projects",
               "url": "portfolio.projects.index",
               "is_route": true,
               "icon": "FolderKanban",
@@ -29,7 +29,7 @@
               "permissions": ["projects.viewAny"]
             },
             {
-              "title": "Kategori Proyek",
+              "title": "Categories",
               "url": "portfolio.categories.index",
               "is_route": true,
               "icon": "Tag",
@@ -38,7 +38,7 @@
               "permissions": ["project-categories.viewAny"]
             },
             {
-              "title": "Teknologi / Stack",
+              "title": "Tech Stack",
               "url": "portfolio.stacks.index",
               "is_route": true,
               "icon": "Layers",
@@ -47,7 +47,7 @@
               "permissions": ["stacks.viewAny"]
             },
             {
-              "title": "Testimoni",
+              "title": "Testimonials",
               "url": "portfolio.testimonials.index",
               "is_route": true,
               "icon": "MessageSquareQuote",
@@ -64,7 +64,7 @@
           "roles": ["super-admin", "admin", "editor"],
           "children": [
             {
-              "title": "Artikel",
+              "title": "Posts",
               "url": "blog.posts.index",
               "is_route": true,
               "icon": "FileText",
@@ -73,7 +73,7 @@
               "permissions": ["posts.viewAny"]
             },
             {
-              "title": "Kategori",
+              "title": "Categories",
               "url": "blog.categories.index",
               "is_route": true,
               "icon": "FolderOpen",
@@ -82,7 +82,7 @@
               "permissions": ["blog-categories.viewAny"]
             },
             {
-              "title": "Tag",
+              "title": "Tags",
               "url": "blog.tags.index",
               "is_route": true,
               "icon": "Tags",
@@ -91,7 +91,7 @@
               "permissions": ["tags.viewAny"]
             },
             {
-              "title": "Komentar",
+              "title": "Comments",
               "url": "blog.comments.index",
               "is_route": true,
               "icon": "MessageCircle",
@@ -108,7 +108,7 @@
           "roles": ["super-admin", "admin", "editor"],
           "children": [
             {
-              "title": "Galeri",
+              "title": "Gallery",
               "url": "media.gallery.index",
               "is_route": true,
               "icon": "GalleryHorizontalEnd",
@@ -128,13 +128,13 @@
           ]
         },
         {
-          "title": "Halaman",
+          "title": "Pages",
           "icon": "LayoutTemplate",
           "order": 5,
           "roles": ["super-admin", "admin"],
           "children": [
             {
-              "title": "Halaman Statis",
+              "title": "Static Pages",
               "url": "pages.index",
               "is_route": true,
               "icon": "FileStack",
@@ -163,13 +163,13 @@
           ]
         },
         {
-          "title": "Profil & CV",
+          "title": "Profile & CV",
           "icon": "UserCircle",
           "order": 6,
           "roles": ["super-admin", "admin"],
           "children": [
             {
-              "title": "Profil Saya",
+              "title": "My Profile",
               "url": "profile.index",
               "is_route": true,
               "icon": "Contact",
@@ -178,7 +178,7 @@
               "permissions": ["profile.view"]
             },
             {
-              "title": "Pengalaman Kerja",
+              "title": "Experience",
               "url": "profile.experiences.index",
               "is_route": true,
               "icon": "History",
@@ -187,7 +187,7 @@
               "permissions": ["experiences.viewAny"]
             },
             {
-              "title": "Pendidikan",
+              "title": "Education",
               "url": "profile.educations.index",
               "is_route": true,
               "icon": "GraduationCap",
@@ -196,7 +196,7 @@
               "permissions": ["educations.viewAny"]
             },
             {
-              "title": "Skill",
+              "title": "Skills",
               "url": "profile.skills.index",
               "is_route": true,
               "icon": "Sparkles",
@@ -205,7 +205,7 @@
               "permissions": ["skills.viewAny"]
             },
             {
-              "title": "Sertifikat",
+              "title": "Certificates",
               "url": "profile.certificates.index",
               "is_route": true,
               "icon": "BadgeCheck",
@@ -214,7 +214,7 @@
               "permissions": ["certificates.viewAny"]
             },
             {
-              "title": "Layanan",
+              "title": "Services",
               "url": "profile.services.index",
               "is_route": true,
               "icon": "HandCoins",
@@ -225,13 +225,13 @@
           ]
         },
         {
-          "title": "Pesan & Kontak",
+          "title": "Messages",
           "icon": "Inbox",
           "order": 7,
           "roles": ["super-admin", "admin"],
           "children": [
             {
-              "title": "Pesan Masuk",
+              "title": "Inbox",
               "url": "contact.messages.index",
               "is_route": true,
               "icon": "MailOpen",
@@ -251,7 +251,7 @@
           ]
         },
         {
-          "title": "Manajemen Akses",
+          "title": "Access Control",
           "icon": "ShieldCheck",
           "order": 8,
           "roles": ["super-admin", "admin"],
@@ -286,13 +286,13 @@
           ]
         },
         {
-          "title": "Manajemen Menu",
+          "title": "Menu Manager",
           "icon": "PanelLeft",
           "order": 9,
           "roles": ["super-admin", "admin"],
           "children": [
             {
-              "title": "Group Menu",
+              "title": "Menu Groups",
               "url": "menu.groups.index",
               "is_route": true,
               "icon": "Layers",
@@ -301,7 +301,7 @@
               "permissions": ["menu-groups.viewAny"]
             },
             {
-              "title": "Item Menu",
+              "title": "Menu Items",
               "url": "menu.index",
               "is_route": true,
               "icon": "List",
@@ -312,13 +312,13 @@
           ]
         },
         {
-          "title": "Pengaturan",
+          "title": "Settings",
           "icon": "Settings",
           "order": 10,
           "roles": ["super-admin", "admin"],
           "children": [
             {
-              "title": "Pengaturan Umum",
+              "title": "General",
               "url": "settings.general",
               "is_route": true,
               "icon": "SlidersHorizontal",
@@ -345,7 +345,7 @@
               "permissions": ["settings.social"]
             },
             {
-              "title": "Integrasi",
+              "title": "Integrations",
               "url": "settings.integrations",
               "is_route": true,
               "icon": "Plug",
@@ -354,7 +354,7 @@
               "permissions": ["settings.integrations"]
             },
             {
-              "title": "Backup & Log",
+              "title": "Backup & Logs",
               "url": "settings.backup",
               "is_route": true,
               "icon": "DatabaseBackup",
