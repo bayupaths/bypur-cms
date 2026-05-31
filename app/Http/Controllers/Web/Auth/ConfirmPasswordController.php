@@ -13,7 +13,7 @@ class ConfirmPasswordController extends WebController
 {
     public function show(): Response
     {
-        return Inertia::render('auth/ConfirmPassword');
+        return Inertia::render('Auth/ConfirmPassword');
     }
 
     public function store(Request $request): RedirectResponse

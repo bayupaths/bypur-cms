@@ -5,26 +5,6 @@ export interface User {
     email: string;
     email_verified_at?: string;
 
-    // Profile
-    avatar?: string;
-    phone?: string;
-    gender?: 'male' | 'female';
-    birth_date?: string;
-    bio?: string;
-
-    // Address
-    address?: string;
-    city?: string;
-    country?: string;
-    postal_code?: string;
-
-    // Social
-    website?: string;
-    github?: string;
-    linkedin?: string;
-    twitter?: string;
-    instagram?: string;
-
     // Status
     is_active: boolean;
     is_superadmin: boolean;

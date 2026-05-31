@@ -14,7 +14,7 @@ class LoginController extends WebController
 {
     public function create(): Response
     {
-        return Inertia::render('auth/Login', [
+        return Inertia::render('Auth/Login', [
             'canResetPassword' => true,
             'status'           => session('status'),
         ]);

@@ -1,6 +1,6 @@
 import type { ColumnDef } from '@tanstack/vue-table';
 import { h } from 'vue';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import DataTableColumnHeader from '@/components/data-table/DataTableColumnHeader.vue';
 import DataTableRowActions from '@/components/data-table/DataTableRowActions.vue';
@@ -40,7 +40,6 @@ export const createColumns = (handlers: {
 
             return h('div', { class: 'flex items-center gap-3' }, [
                 h(Avatar, { class: 'h-8 w-8 rounded-lg' }, () => [
-                    h(AvatarImage, { src: user.avatar ?? '', alt: user.name }),
                     h(AvatarFallback, { class: 'rounded-lg text-xs' }, () => initials),
                 ]),
                 h('div', { class: 'grid leading-tight' }, [
@@ -58,16 +57,6 @@ export const createColumns = (handlers: {
         cell: ({ row }) =>
             row.original.username
                 ? h('span', { class: 'text-sm font-mono' }, `@${row.original.username}`)
-                : h('span', { class: 'text-muted-foreground text-xs' }, '—'),
-    },
-
-    {
-        accessorKey: 'phone',
-        meta: { label: 'Telepon' },
-        header: ({ column }) => h(DataTableColumnHeader, { column, title: 'Telepon' }),
-        cell: ({ row }) =>
-            row.original.phone
-                ? h('span', { class: 'text-sm' }, row.original.phone)
                 : h('span', { class: 'text-muted-foreground text-xs' }, '—'),
     },
 

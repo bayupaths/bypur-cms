@@ -22,7 +22,6 @@ import {
     SheetTitle,
 } from '@/components/ui/sheet';
 import { Switch } from '@/components/ui/switch';
-import { Textarea } from '@/components/ui/textarea';
 import InputError from '@/components/common/InputError.vue';
 import PasswordField from '@/components/common/PasswordField.vue';
 import type { User } from '@/types';
@@ -51,23 +50,6 @@ const form = useForm({
     email: '',
     password: '',
     password_confirmation: '',
-    // Profile
-    avatar: '',
-    phone: '',
-    gender: '' as 'male' | 'female' | '',
-    birth_date: '',
-    bio: '',
-    // Address
-    address: '',
-    city: '',
-    country: 'Indonesia',
-    postal_code: '',
-    // Social
-    website: '',
-    github: '',
-    linkedin: '',
-    twitter: '',
-    instagram: '',
     // Status
     is_active: true,
     is_superadmin: false,
@@ -86,26 +68,11 @@ watch(
             form.email = u.email;
             form.password = '';
             form.password_confirmation = '';
-            form.avatar = u.avatar ?? '';
-            form.phone = u.phone ?? '';
-            form.gender = u.gender ?? '';
-            form.birth_date = u.birth_date ?? '';
-            form.bio = u.bio ?? '';
-            form.address = u.address ?? '';
-            form.city = u.city ?? '';
-            form.country = u.country ?? 'Indonesia';
-            form.postal_code = u.postal_code ?? '';
-            form.website = u.website ?? '';
-            form.github = u.github ?? '';
-            form.linkedin = u.linkedin ?? '';
-            form.twitter = u.twitter ?? '';
-            form.instagram = u.instagram ?? '';
             form.is_active = u.is_active;
             form.is_superadmin = u.is_superadmin;
             form.roles = (u as any).roles_list?.map((r: any) => r.id) ?? [];
         } else {
             form.reset();
-            form.country = 'Indonesia';
             form.is_active = true;
             form.is_superadmin = false;
         }
@@ -144,7 +111,6 @@ function submit() {
             onSuccess: () => {
                 close();
                 form.reset();
-                form.country = 'Indonesia';
                 form.is_active = true;
             },
         });
@@ -197,117 +163,6 @@ function submit() {
                             <Label>Konfirmasi Password {{ !isEdit ? '*' : '' }}</Label>
                             <PasswordField v-model="form.password_confirmation" placeholder="Ulangi password" :aria-invalid="!!form.errors.password_confirmation" />
                             <InputError :message="form.errors.password_confirmation" />
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ── Profil ─────────────────────────────────────────────────── -->
-                <div class="space-y-3 border-b px-6 py-3">
-                    <p class="text-xs font-medium uppercase tracking-wider text-muted-foreground">Profil</p>
-
-                    <div class="grid grid-cols-2 items-start gap-3">
-                        <div class="grid gap-1.5">
-                            <Label>Telepon</Label>
-                            <Input v-model="form.phone" placeholder="+62..." :aria-invalid="!!form.errors.phone" />
-                            <InputError :message="form.errors.phone" />
-                        </div>
-                        <div class="grid gap-1.5">
-                            <Label>Jenis Kelamin</Label>
-                            <Select v-model="form.gender">
-                                <SelectTrigger :aria-invalid="!!form.errors.gender">
-                                    <SelectValue placeholder="Pilih..." />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectItem value="male">Laki-laki</SelectItem>
-                                    <SelectItem value="female">Perempuan</SelectItem>
-                                </SelectContent>
-                            </Select>
-                            <InputError :message="form.errors.gender" />
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-2 items-start gap-3">
-                        <div class="grid gap-1.5">
-                            <Label>Tanggal Lahir</Label>
-                            <Input v-model="form.birth_date" type="date" :aria-invalid="!!form.errors.birth_date" />
-                            <InputError :message="form.errors.birth_date" />
-                        </div>
-                        <div class="grid gap-1.5">
-                            <Label>Avatar URL</Label>
-                            <Input v-model="form.avatar" placeholder="https://..." :aria-invalid="!!form.errors.avatar" />
-                            <InputError :message="form.errors.avatar" />
-                        </div>
-                    </div>
-
-                    <div class="grid gap-1.5">
-                        <Label>Bio</Label>
-                        <Textarea v-model="form.bio" placeholder="Deskripsi singkat..." rows="2" :aria-invalid="!!form.errors.bio" />
-                        <InputError :message="form.errors.bio" />
-                    </div>
-                </div>
-
-                <!-- ── Alamat ─────────────────────────────────────────────────── -->
-                <div class="space-y-3 border-b px-6 py-3">
-                    <p class="text-xs font-medium uppercase tracking-wider text-muted-foreground">Alamat</p>
-
-                    <div class="grid gap-1.5">
-                        <Label>Alamat</Label>
-                        <Input v-model="form.address" placeholder="Jalan, nomor, dll." :aria-invalid="!!form.errors.address" />
-                        <InputError :message="form.errors.address" />
-                    </div>
-
-                    <div class="grid grid-cols-2 items-start gap-3">
-                        <div class="grid gap-1.5">
-                            <Label>Kota</Label>
-                            <Input v-model="form.city" placeholder="Jakarta" :aria-invalid="!!form.errors.city" />
-                            <InputError :message="form.errors.city" />
-                        </div>
-                        <div class="grid gap-1.5">
-                            <Label>Kode Pos</Label>
-                            <Input v-model="form.postal_code" placeholder="12345" :aria-invalid="!!form.errors.postal_code" />
-                            <InputError :message="form.errors.postal_code" />
-                        </div>
-                    </div>
-
-                    <div class="grid gap-1.5">
-                        <Label>Negara</Label>
-                        <Input v-model="form.country" placeholder="Indonesia" :aria-invalid="!!form.errors.country" />
-                        <InputError :message="form.errors.country" />
-                    </div>
-                </div>
-
-                <!-- ── Social ─────────────────────────────────────────────────── -->
-                <div class="space-y-3 border-b px-6 py-3">
-                    <p class="text-xs font-medium uppercase tracking-wider text-muted-foreground">Sosial Media</p>
-
-                    <div class="grid grid-cols-2 items-start gap-3">
-                        <div class="grid gap-1.5">
-                            <Label>Website</Label>
-                            <Input v-model="form.website" placeholder="https://..." :aria-invalid="!!form.errors.website" />
-                            <InputError :message="form.errors.website" />
-                        </div>
-                        <div class="grid gap-1.5">
-                            <Label>GitHub</Label>
-                            <Input v-model="form.github" placeholder="username" :aria-invalid="!!form.errors.github" />
-                            <InputError :message="form.errors.github" />
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-3 items-start gap-3">
-                        <div class="grid gap-1.5">
-                            <Label>LinkedIn</Label>
-                            <Input v-model="form.linkedin" placeholder="username" :aria-invalid="!!form.errors.linkedin" />
-                            <InputError :message="form.errors.linkedin" />
-                        </div>
-                        <div class="grid gap-1.5">
-                            <Label>Twitter/X</Label>
-                            <Input v-model="form.twitter" placeholder="username" :aria-invalid="!!form.errors.twitter" />
-                            <InputError :message="form.errors.twitter" />
-                        </div>
-                        <div class="grid gap-1.5">
-                            <Label>Instagram</Label>
-                            <Input v-model="form.instagram" placeholder="username" :aria-invalid="!!form.errors.instagram" />
-                            <InputError :message="form.errors.instagram" />
                         </div>
                     </div>
                 </div>

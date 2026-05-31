@@ -47,12 +47,9 @@ class UserController extends WebController
             ->with('success', 'User berhasil dibuat.');
     }
 
-    public function show(User $user): Response
+    public function show(User $user): RedirectResponse
     {
-        return Inertia::render('auth/User/Show', [
-            'user'  => $this->userService->find($user->id),
-            'roles' => $this->roleService->all(),
-        ]);
+        return redirect()->route('auth.users.profile', $user);
     }
 
 

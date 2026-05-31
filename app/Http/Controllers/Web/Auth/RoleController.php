@@ -34,7 +34,7 @@ class RoleController extends WebController
             searchable: ['name', 'display_name', 'description'],
         );
 
-        return Inertia::render('auth/Role/Index', [
+        return Inertia::render('Auth/Role/Index', [
             'roles'               => RoleResource::collection($roles),
             'permissions_grouped' => $this->permissionService->allGrouped(),
         ]);
@@ -57,7 +57,7 @@ class RoleController extends WebController
 
     public function show(Role $role): Response
     {
-        return Inertia::render('auth/Role/Show', [
+        return Inertia::render('Auth/Role/Show', [
             'role' => $this->roleService->find($role->id),
         ]);
     }
