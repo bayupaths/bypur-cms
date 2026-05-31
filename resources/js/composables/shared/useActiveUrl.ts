@@ -12,7 +12,7 @@ function resolveHref(href: Href): string | null {
 
 function toPathname(href: Href): string | null {
     const resolved = resolveHref(href);
-    if (!resolved) return null;
+    if (!resolved || resolved === '#') return null;
 
     try {
         return new URL(resolved, window?.location.origin).pathname;
