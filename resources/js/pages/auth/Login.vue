@@ -50,7 +50,7 @@ function submit() {
             </div>
 
             <div class="space-y-2">
-                <div class="flex items-center justify-between">
+                <!-- <div class="flex items-center justify-between">
                     <Label for="password">Password</Label>
                     <TextLink
                         v-if="canResetPassword"
@@ -59,7 +59,7 @@ function submit() {
                     >
                         Forgot password?
                     </TextLink>
-                </div>
+                </div> -->
                 <PasswordField
                     id="password"
                     v-model="form.password"
@@ -83,11 +83,6 @@ function submit() {
             <Button type="submit" class="w-full" :disabled="form.processing">
                 Log In
             </Button>
-
-            <p class="text-center text-sm text-muted-foreground">
-                Don't have an account?
-                <TextLink :href="route('register')">Register</TextLink>
-            </p>
         </form>
     </AuthSplitLayout>
 </template>
