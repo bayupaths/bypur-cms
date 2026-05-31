@@ -21,26 +21,6 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
 
-            // Profile
-            $table->string('avatar')->nullable();
-            $table->string('phone', 20)->nullable();
-            $table->enum('gender', ['male', 'female'])->nullable();
-            $table->date('birth_date')->nullable();
-            $table->string('bio')->nullable();
-
-            // Address
-            $table->string('address')->nullable();
-            $table->string('city', 100)->nullable();
-            $table->string('country', 100)->nullable()->default('Indonesia');
-            $table->string('postal_code', 10)->nullable();
-
-            // Social links
-            $table->string('website')->nullable();
-            $table->string('github')->nullable();
-            $table->string('linkedin')->nullable();
-            $table->string('twitter')->nullable();
-            $table->string('instagram')->nullable();
-
             // Status & access
             $table->boolean('is_active')->default(true);
             $table->boolean('is_superadmin')->default(false);
@@ -49,10 +29,10 @@ return new class extends Migration
             $table->timestamp('last_login_at')->nullable();
             $table->string('last_login_ip', 45)->nullable();
             $table->unsignedSmallInteger('login_attempts')->default(0);
-            $table->timestamp('locked_until')->nullable();  // brute-force lockout
+            $table->timestamp('locked_until')->nullable();
 
             // Misc
-            $table->json('meta')->nullable();   // preferences, settings, extra data
+            $table->json('meta')->nullable();
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();
