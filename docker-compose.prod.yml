@@ -2,13 +2,11 @@ services:
   app:
     build:
       target: app-production
-    volumes: []
     restart: always
 
   queue:
     build:
       target: app-production
-    volumes: []
     restart: always
 
   nginx:
