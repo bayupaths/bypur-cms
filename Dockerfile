@@ -112,6 +112,7 @@ CMD ["php-fpm"]
 # ══════════════════════════════════════════════════════════════════
 FROM deps-php AS app-production
 
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 COPY --from=deps-composer /var/www/html/vendor /var/www/html/vendor
 
 WORKDIR /var/www/html
