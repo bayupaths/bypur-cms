@@ -1,29 +1,5 @@
 services:
 
-  # ── Traefik v3 — Reverse Proxy ────────────────────────────────
-  traefik:
-    image: traefik:v3.3
-    container_name: portfolio_admin_traefik
-    restart: unless-stopped
-    command:
-      - "--log.level=INFO"
-      - "--api.dashboard=true"
-      - "--providers.docker=true"
-      - "--providers.docker.exposedByDefault=false"
-      - "--providers.docker.network=portfolio_network"
-      - "--entrypoints.web.address=:80"
-    ports:
-      - "80:80"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.traefik-dashboard.rule=Host(`traefik.bypur.test`)"
-      - "traefik.http.routers.traefik-dashboard.entrypoints=web"
-      - "traefik.http.routers.traefik-dashboard.service=api@internal"
-    networks:
-      - portfolio_network
-
   # ── PHP Application ───────────────────────────────────────────
   app:
     build:
@@ -53,20 +29,14 @@ services:
     container_name: portfolio_admin_nginx
     restart: unless-stopped
     ports:
-      - "${NGINX_PORT:-8080}:80"
+      - "${NGINX_PORT:-80}:80"
     volumes:
       - .:/var/www/html
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.portfolio.rule=Host(`portfolio.bypur.test`)"
-      - "traefik.http.routers.portfolio.entrypoints=web"
-      - "traefik.http.services.portfolio.loadbalancer.server.port=80"
     networks:
       - portfolio_network
     depends_on:
       - app
-      - traefik
 
   # ── PostgreSQL ────────────────────────────────────────────────
   postgres:

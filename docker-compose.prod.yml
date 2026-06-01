@@ -10,3 +10,10 @@ services:
       target: app-production
     volumes: []
     restart: always
+
+  nginx:
+    ports:
+      - "127.0.0.1:8080:80"   # hanya bisa diakses dari localhost VPS
+    volumes:
+      - ./docker/nginx/production.conf:/etc/nginx/conf.d/default.conf:ro
+    restart: always
