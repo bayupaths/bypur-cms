@@ -120,7 +120,7 @@ WORKDIR /var/www/html
 COPY . .
 COPY --from=deps-node /app/public/build ./public/build
 
-RUN composer dump-autoload --optimize --no-dev \
+RUN composer dump-autoload --optimize \
     && chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html/storage \
     && chmod -R 755 /var/www/html/bootstrap/cache
