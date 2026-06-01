@@ -32,7 +32,7 @@ class UserController extends WebController
             searchable: ['name', 'email', 'username'],
         );
 
-        return Inertia::render('auth/User/Index', [
+        return Inertia::render('Auth/User/Index', [
             'users'   => UserResource::collection($users),
             'roles'   => $this->roleService->all(),
             'filters' => $request->only('search'),

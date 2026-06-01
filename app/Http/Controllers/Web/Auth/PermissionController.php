@@ -33,7 +33,7 @@ class PermissionController extends WebController
             'description',
         ]);
 
-        return Inertia::render('auth/Permission/Index', [
+        return Inertia::render('Auth/Permission/Index', [
             'permissions' => PermissionResource::collection($permissions),
             'groups'      => $this->permissionService->groups(),
         ]);
