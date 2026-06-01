@@ -1,58 +1,162 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Portfolio Admin
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Private admin panel for managing portfolio website content. Built with **Laravel 13**, **Vue 3 + Inertia.js**, and **Tailwind CSS v4**.
 
-## About Laravel
+## Tech Stack
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+| Layer | Technology |
+|---|---|
+| Backend | PHP 8.3, Laravel 13 |
+| Frontend | Vue 3, Inertia.js, TypeScript |
+| Styling | Tailwind CSS v4 |
+| UI Components | Reka UI, Lucide Icons |
+| Database | PostgreSQL 16 |
+| Cache / Queue / Session | Redis 7 |
+| Web Server | Nginx 1.27 + PHP-FPM 8.3 |
+| Build Tool | Vite 8 |
+| Container | Docker + Docker Compose |
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Requirements
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Without Docker
+- PHP >= 8.3 with extensions: `pdo_pgsql`, `pgsql`, `redis`, `gd`, `zip`, `intl`, `pcntl`, `bcmath`, `opcache`
+- Composer 2
+- Node.js >= 20 + npm
+- PostgreSQL >= 16
+- Redis >= 7
 
-## Learning Laravel
+### With Docker
+- Docker >= 24
+- Docker Compose >= 2.20
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## Quick Start (Docker)
 
 ```bash
-composer require laravel/boost --dev
+# 1. Clone and enter project
+git clone <repository-url> portfolio-admin
+cd portfolio-admin
 
-php artisan boost:install
+# 2. Copy environment file
+cp .env.example .env
+
+# 3. Start all services
+docker compose up -d
+
+# 4. Generate application key
+docker compose exec app php artisan key:generate
+
+# 5. Build frontend assets (on host)
+npm install
+npm run build
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+App will be available at **http://localhost:8080**.
 
-## Contributing
+See [DOCKER.md](DOCKER.md) for full Docker documentation.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Quick Start (Local)
 
-## Code of Conduct
+```bash
+# 1. Install PHP dependencies
+composer install
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+# 2. Install Node dependencies
+npm install
 
-## Security Vulnerabilities
+# 3. Copy and configure environment
+cp .env.example .env
+# Edit .env — set DB_HOST, DB_PASSWORD, REDIS_HOST etc.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+# 4. Generate key and run migrations
+php artisan key:generate
+php artisan migrate
+
+# 5. Start dev server
+php artisan serve &
+npm run dev
+```
+
+## Features
+
+### Profile & CV Management
+- **Profile** — personal info, bio, social links, availability status
+- **Experience** — work history with tech stack, drag-to-reorder
+- **Education** — academic background, drag-to-reorder
+- **Skills** — skill catalog with category, level, drag-to-reorder
+- **Certificates** — certifications with issuer and credential URL
+- **Services** — offered services with toggle active/inactive
+
+### User & Access Management
+- **Users** — create/edit users
+- **Roles & Permissions** — RBAC role management
+
+### Menu Management
+- **Menu Groups** — sidebar navigation grouping
+- **Menu Items** — navigation items with ordering
+
+## Project Structure
+
+```
+app/
+├── Http/Controllers/Web/   # Inertia controllers
+│   ├── Auth/               # Login, user, role, permission
+│   ├── Profile/            # Profile, experience, education...
+│   └── Menu/               # Menu group & items
+├── Models/                 # Eloquent models
+├── Services/               # Business logic
+│   └── Profile/            # Profile domain services (with Redis cache)
+└── Support/
+    └── CacheKeys.php       # Centralized Redis cache key definitions
+resources/js/
+├── pages/                  # Inertia Vue pages
+│   ├── auth/               # Login, user management
+│   └── Profile/            # Profile management pages
+├── components/             # Shared Vue components
+├── composables/            # Vue composables
+├── schemas/                # Zod validation schemas
+└── types/                  # TypeScript type definitions
+```
+
+## Available Commands
+
+```bash
+# Development
+npm run dev                          # Start Vite dev server
+php artisan serve                    # Start PHP dev server
+
+# Database
+php artisan migrate                  # Run migrations
+php artisan migrate:fresh --seed     # Fresh migration with seeders
+
+# Cache
+php artisan cache:clear              # Clear all cache
+php artisan config:cache             # Cache config (production)
+php artisan route:cache              # Cache routes (production)
+
+# Queue
+php artisan queue:work               # Start queue worker
+
+# Docker shortcuts
+docker compose exec app php artisan <command>
+docker compose exec app composer <command>
+```
+
+## Environment Variables
+
+Key variables in `.env`:
+
+| Variable | Description | Default |
+|---|---|---|
+| `APP_URL` | Application URL | `http://localhost:8080` |
+| `NGINX_PORT` | Host port for Nginx | `8080` |
+| `DB_HOST` | PostgreSQL host | `postgres` (Docker) |
+| `DB_DATABASE` | Database name | `portfolio_admin` |
+| `DB_USERNAME` | Database user | `portfolio` |
+| `REDIS_HOST` | Redis host | `redis` (Docker) |
+| `CACHE_STORE` | Cache driver | `redis` |
+| `QUEUE_CONNECTION` | Queue driver | `redis` |
+| `SESSION_DRIVER` | Session driver | `redis` |
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Private — all rights reserved.
