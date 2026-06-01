@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\Api\Auth\PermissionController;
-use App\Http\Controllers\Api\Auth\RoleController;
-use App\Http\Controllers\Api\Auth\UserController;
-use App\Http\Controllers\Api\Menu\MenuController;
-use App\Http\Controllers\Api\Menu\MenuGroupController;
 use App\Http\Controllers\Api\NotificationController;
+use App\Http\Controllers\Api\Profile\CertificateController;
+use App\Http\Controllers\Api\Profile\EducationController;
+use App\Http\Controllers\Api\Profile\ExperienceController;
+use App\Http\Controllers\Api\Profile\ProfileController;
+use App\Http\Controllers\Api\Profile\ServiceController;
+use App\Http\Controllers\Api\Profile\SkillController;
 use Illuminate\Support\Facades\Route;
 
 // ── Notifications (no version prefix — matches /api/notifications) ─────────
@@ -16,21 +17,12 @@ Route::middleware(['web', 'auth'])->prefix('notifications')->name('api.notificat
     Route::patch('/{id}/read', [NotificationController::class, 'markAsRead'])->name('mark-read');
 });
 
-Route::prefix('v1')->name('api.v1.')->middleware(['auth:web'])->group(function () {
-    // ── Auth Management ───────────────────────────────────────────
-    Route::prefix('auth')->name('auth.')->group(function () {
-        Route::apiResource('users', UserController::class);
-        Route::apiResource('roles', RoleController::class);
-        Route::post('roles/{role}/permissions', [RoleController::class, 'syncPermissions'])->name('roles.permissions.sync');
-        Route::apiResource('permissions', PermissionController::class);
-        Route::post('permissions/{permission}/conditions', [PermissionController::class, 'syncConditions'])->name('permissions.conditions.sync');
-    });
-
-    // ── Menu Management ───────────────────────────────────────────
-    Route::prefix('menu')->name('menu.')->group(function () {
-        Route::apiResource('groups', MenuGroupController::class);
-        Route::post('items/reorder', [MenuController::class, 'reorder'])->name('items.reorder');
-        Route::get('items/tree/{group}', [MenuController::class, 'tree'])->name('items.tree');
-        Route::apiResource('items', MenuController::class);
-    });
+// ── Profile Public API (X-Api-Key) ─────────────────────────────
+Route::prefix('proile')->name('api.v1.proile.')->middleware(['api.key'])->group(function () {
+    Route::get('me', [ProfileController::class, 'show'])->name('me');
+    Route::get('experiences', [ExperienceController::class, 'index'])->name('experiences');
+    Route::get('educations', [EducationController::class, 'index'])->name('educations');
+    Route::get('certificates', [CertificateController::class, 'index'])->name('certificates');
+    Route::get('skills', [SkillController::class, 'index'])->name('skills');
+    Route::get('services', [ServiceController::class, 'index'])->name('services');
 });
