@@ -1,6 +1,8 @@
-# Portfolio Admin
+# CMS Bypur
 
-Private admin panel for managing portfolio website content. Built with **Laravel 13**, **Vue 3 + Inertia.js**, and **Tailwind CSS v4**.
+Admin panel untuk mengelola konten website portfolio `bypur.my.id`. Dibangun dengan **Laravel 13**, **Vue 3 + Inertia.js**, dan **Tailwind CSS v4**.
+
+URL Production: **https://cms.bypur.my.id**
 
 ## Tech Stack
 
@@ -18,63 +20,88 @@ Private admin panel for managing portfolio website content. Built with **Laravel
 
 ## Requirements
 
-### Without Docker
-- PHP >= 8.3 with extensions: `pdo_pgsql`, `pgsql`, `redis`, `gd`, `zip`, `intl`, `pcntl`, `bcmath`, `opcache`
-- Composer 2
-- Node.js >= 20 + npm
-- PostgreSQL >= 16
-- Redis >= 7
-
-### With Docker
 - Docker >= 24
 - Docker Compose >= 2.20
 
-## Quick Start (Docker)
+## Quick Start — Development
 
 ```bash
-# 1. Clone and enter project
+# 1. Clone
 git clone <repository-url> portfolio-admin
 cd portfolio-admin
 
-# 2. Copy environment file
+# 2. Copy environment
 cp .env.example .env
+# Edit .env: set APP_KEY, DB_PASSWORD, dll
 
-# 3. Start all services
-docker compose up -d
+# 3. Generate app key
+docker compose --profile dev run --rm app php artisan key:generate
 
-# 4. Generate application key
-docker compose exec app php artisan key:generate
-
-# 5. Build frontend assets (on host)
-npm install
-npm run build
+# 4. Jalankan semua services
+docker compose --profile dev up -d
 ```
 
-App will be available at **http://localhost:8080**.
+App tersedia di **http://localhost:8080** · Vite dev server di **http://localhost:5173**.
 
-See [DOCKER.md](DOCKER.md) for full Docker documentation.
+Lihat [DOCKER.md](DOCKER.md) untuk dokumentasi lengkap termasuk deploy production ke VPS.
 
-## Quick Start (Local)
+## Features
 
-```bash
-# 1. Install PHP dependencies
-composer install
+### Profile & CV Management
+- **Profile** — personal info, bio, social links, availability status
+- **Experience** — work history with tech stack, drag-to-reorder
+- **Education** — academic background, drag-to-reorder
+- **Skills** — skill catalog with category, level, drag-to-reorder
+- **Certificates** — certifications with issuer and credential URL
+- **Services** — offered services with toggle active/inactive
 
-# 2. Install Node dependencies
-npm install
+### User & Access Management
+- **Users** — create/edit users
+- **Roles & Permissions** — RBAC role management
 
-# 3. Copy and configure environment
-cp .env.example .env
-# Edit .env — set DB_HOST, DB_PASSWORD, REDIS_HOST etc.
+### Menu Management
+- **Menu Groups** — sidebar navigation grouping
+- **Menu Items** — navigation items with ordering
 
-# 4. Generate key and run migrations
-php artisan key:generate
-php artisan migrate
+## Project Structure
 
-# 5. Start dev server
-php artisan serve &
-npm run dev
 ```
+app/
+├── Http/Controllers/Web/   # Inertia controllers
+│   ├── Auth/               # Login, user, role, permission
+│   ├── Profile/            # Profile, experience, education...
+│   └── Menu/               # Menu group & items
+├── Models/                 # Eloquent models
+├── Services/               # Business logic
+│   └── Profile/            # Profile domain services (with Redis cache)
+└── Support/
+    └── CacheKeys.php       # Centralized Redis cache key definitions
+resources/js/
+├── pages/                  # Inertia Vue pages
+├── components/             # Shared Vue components
+├── composables/            # Vue composables
+├── schemas/                # Zod validation schemas
+└── types/                  # TypeScript type definitions
+```
+
+## Environment Variables
+
+| Variable | Description | Default |
+|---|---|---|
+| `APP_URL` | Application URL | `http://localhost:8080` |
+| `NGINX_PORT` | Host port untuk Nginx | `8080` |
+| `DB_HOST` | PostgreSQL host | `postgres` |
+| `DB_DATABASE` | Nama database | `cms_bypur` |
+| `DB_USERNAME` | Database user | `portfolio` |
+| `REDIS_HOST` | Redis host | `redis` |
+| `CACHE_STORE` | Cache driver | `redis` |
+| `QUEUE_CONNECTION` | Queue driver | `redis` |
+| `SESSION_DRIVER` | Session driver | `redis` |
+
+## License
+
+Private — All rights reserved.
+
 
 ## Features
 

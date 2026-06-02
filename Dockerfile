@@ -92,11 +92,6 @@ FROM deps-php AS app-local
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 COPY --from=deps-composer /var/www/html/vendor /var/www/html/vendor
 
-# Copy source so dump-autoload can build proper classmap
-COPY . /var/www/html/
-RUN composer dump-autoload --optimize
-# Source akan di-override oleh bind-mount saat runtime
-
 WORKDIR /var/www/html
 
 COPY docker/php/entrypoint.sh /usr/local/bin/entrypoint.sh
@@ -131,3 +126,16 @@ RUN chmod +x /usr/local/bin/entrypoint.sh
 EXPOSE 9000
 ENTRYPOINT ["entrypoint.sh"]
 CMD ["php-fpm"]
+
+
+# ══════════════════════════════════════════════════════════════════
+# Stage 6 — nginx-production
+#   Nginx image dengan public assets baked-in dari app-production.
+# ══════════════════════════════════════════════════════════════════
+FROM nginx:1.27-alpine AS nginx-production
+
+COPY --from=app-production /var/www/html/public /var/www/html/public
+COPY docker/nginx/production.conf /etc/nginx/conf.d/default.conf
+COPY docker/nginx/errors /usr/share/nginx/html/errors
+
+EXPOSE 80

@@ -43,12 +43,11 @@ php artisan cache:clear
 echo "[entrypoint] Running migrations..."
 php artisan migrate --force --no-interaction
 
-ROLE_COUNT=$(php artisan tinker --execute="echo \App\Models\Role::count();" 2>/dev/null | tail -1)
-if [ "$ROLE_COUNT" = "0" ] || [ -z "$ROLE_COUNT" ]; then
+if php artisan tinker --execute="exit(App\Models\Role::count() > 0 ? 0 : 1);" 2>/dev/null; then
+    echo "[entrypoint] Database already seeded, skipping."
+else
     echo "[entrypoint] Running database seeders..."
     php artisan db:seed --force --no-interaction
-else
-    echo "[entrypoint] Database already seeded, skipping."
 fi
 
 if [ "${APP_ENV}" = "production" ]; then

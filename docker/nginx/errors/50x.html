@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>503 — Layanan Tidak Tersedia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&display=swap">
+  <style>
+    :root {
+      --background: oklch(0.972 0.008 215);
+      --foreground: oklch(0.18 0.03 220);
+      --muted-foreground: oklch(0.625 0.03 215);
+      --primary: oklch(0.53 0.105 215);
+      --border: oklch(0.833 0.022 215);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --background: oklch(0.142 0.025 220);
+        --foreground: oklch(0.959 0.01 215);
+        --muted-foreground: oklch(0.625 0.03 215);
+        --primary: oklch(0.66 0.12 210);
+        --border: oklch(0.315 0.04 215);
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Geist', ui-sans-serif, system-ui, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: var(--background);
+      color: var(--foreground);
+    }
+    .box { text-align: center; padding: 2rem; }
+    h1 {
+      font-size: 6rem;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--border);
+    }
+    p {
+      font-size: 1.05rem;
+      color: var(--muted-foreground);
+      margin: 0.75rem 0 0.5rem;
+    }
+    small {
+      font-size: 0.85rem;
+      color: var(--border);
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>503</h1>
+    <p>Layanan sedang tidak tersedia.<br>Mohon coba beberapa saat lagi.</p>
+    <small>Jika masalah berlanjut, hubungi administrator.</small>
+  </div>
+</body>
+</html>
