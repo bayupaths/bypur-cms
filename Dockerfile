@@ -116,6 +116,7 @@ COPY . .
 COPY --from=deps-node /app/public/build ./public/build
 
 RUN composer dump-autoload --optimize \
+    && mkdir -p storage/framework/views storage/framework/cache storage/framework/sessions storage/logs bootstrap/cache \
     && chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html/storage \
     && chmod -R 755 /var/www/html/bootstrap/cache

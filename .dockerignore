@@ -16,7 +16,8 @@ vendor
 .env.*
 !.env.example
 docker-compose*.yml
-docker/nginx
+docker/nginx/default.conf
+docker/nginx/vps-host.conf
 DOCKER.md
 README.md
 phpunit.xml
